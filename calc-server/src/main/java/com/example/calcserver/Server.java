@@ -27,11 +27,11 @@ public class Server {
                 while (socket.isConnected()) {
                     try {
                         String data = bufferedReader.readLine();
-                        String[] elements = data.split(";");
+                        String[] elements = data.split(",");
                         RequestResponse newResult = new RequestResponse(elements[0], elements[1], elements[2], elements[3], elements[4]);
                         if (newResult.type.equals("1")) {
                             try {
-                                bufferedWriter.write("2" + ";" + newResult.num1 + ";" + newResult.operator + ";" + newResult.num2 + ";" + calculateResult(newResult));
+                                bufferedWriter.write("2" + "," +  newResult.operator + "," + newResult.num1 + "," + newResult.num2 + "," + calculateResult(newResult));
                                 bufferedWriter.newLine();
                                 bufferedWriter.flush();
                                 System.out.println("Operation sent to server");
@@ -65,12 +65,16 @@ public class Server {
         switch (data.operator) {
             case "1":
                 result = String.valueOf(num1 + num2);
+                break;
             case "2":
                 result = String.valueOf(num1 - num2);
+                break;
             case "3":
                 result = String.valueOf(num1 * num2);
+                break;
             default:
                 result = String.valueOf(num1 / num2);
+                break;
         }
         return result;
     }

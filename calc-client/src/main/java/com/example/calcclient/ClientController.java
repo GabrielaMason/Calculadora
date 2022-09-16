@@ -41,7 +41,7 @@ public class ClientController implements Initializable {
         if (operator.equals("=")) {
             if (!num1.isEmpty() && !num2.isEmpty() &&
                     !this.operator.isEmpty()) {
-                client.sendRequestToMiddleware(num1, this.operator, num2);
+                client.sendRequestToMiddleware(this.operator, num1, num2);
                 output.setText("");
                 num1 = ""; num2 = ""; this.operator = "";
             }

@@ -40,7 +40,7 @@ public class ElementHandler implements Runnable{
                 String[] data = request.split(",");
                 DataComponent newData = new DataComponent(data[0], data[1], data[2], data[3], data[4]);
                 broadcastData(request);
-                //Controller
+                MiddlewareController.addMessageLog(newData, vbox);//Controller
             } catch (IOException e){
                 e.printStackTrace();
                 closeEverything(socket, bufferedReader, bufferedWriter);

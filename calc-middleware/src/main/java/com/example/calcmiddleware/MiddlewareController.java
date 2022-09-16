@@ -12,7 +12,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -82,18 +81,13 @@ public class MiddlewareController implements Initializable {
         }
 
         Text dataBody = new Text(operator);
-        Text dataType = new Text("Tipo de respuesta: " + data.type);
         Separator separator = new Separator(Orientation.HORIZONTAL);
 
         dataBody.setStyle("-fx-font: 12 arial;");
-        dataType.setStyle("-fx-font: 11 arial;");
-
-        dataType.setFill(Color.color(0.2, 0.2, 0.2));
 
         TextFlow txtFlowO = new TextFlow(dataBody);
 
         lvBox.getChildren().add(txtFlowO);
-        lvBox.getChildren().add(dataType);
         lvBox.setPadding(new Insets(5, 10, 5, 10));
 
         hBox.getChildren().add(lvBox);

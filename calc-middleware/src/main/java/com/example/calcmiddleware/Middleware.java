@@ -14,22 +14,23 @@ public class Middleware {
     }
 
     public void startMiddleware(VBox vBox) {
-        int idx = 0;
-        try {
-            while (!serverSocket.isClosed()){
-                if (idx < 4) {
-                    Socket socket = serverSocket.accept();
-                    ElementHandler elementHandler = new ElementHandler(socket, vBox);
-                    Thread thread = new Thread(elementHandler);
-                    thread.start();
-                    idx++;
-                } else {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (!serverSocket.isClosed()) {
+                        Socket socket = serverSocket.accept();
+                        System.out.println("Element connected");
+                        ElementHandler elementHandler = new ElementHandler(socket, vBox);
+                        Thread thread = new Thread(elementHandler);
+                        thread.start();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                     closeEverything();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }).start();
     }
 
     public void closeEverything(){
